@@ -33,5 +33,7 @@ COPY ./assets/entrypoint.sh /usr/bin/entrypoint
 
 VOLUME ["/opt/jamspell/data"]
 
+EXPOSE 8080/tcp
+
 ENTRYPOINT /usr/bin/entrypoint
 

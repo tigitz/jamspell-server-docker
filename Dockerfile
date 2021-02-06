@@ -1,6 +1,7 @@
 FROM registry.fedoraproject.org/fedora:latest
 
 ARG VERSION=master
+
 ENV SOURCE_URL=https://github.com/bakwc/JamSpell/archive/${VERSION}.tar.gz
 ENV SOURCE_DIR=/opt/source
 
@@ -27,6 +28,10 @@ ENV MODEL=en.bin
 RUN dnf -y install langpacks-en libstdc++ \
     && dnf -y clean all \
     && install -d ${DATA_DIR}
+
+ARG DATA_MODEL_LANG=en
+ENV DATA_MODEL_URL=https://github.com/bakwc/JamSpell-models/raw/master/${DATA_MODEL_LANG}.tar.gz
+RUN curl -Ls ${DATA_MODEL_URL}  | tar -xvz -C ${DATA_DIR}
 
 COPY --from=0 /opt/source/build/web_server/web_server /usr/bin/jamspell-server
 COPY ./assets/entrypoint.sh /usr/bin/entrypoint

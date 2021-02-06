@@ -1,6 +1,7 @@
 # JamSpell HTTP API Server Docker Container
 
-A docker container for the [JamSpell HTTP API Server](https://github.com/bakwc/JamSpell#http-api).
+A docker container for the [JamSpell HTTP API Server](https://github.com/bakwc/JamSpell#http-api) with `en` data model
+preloaded.
 
 ## Environment Configuration
 | Environment Variable  | Description | Default Value |
@@ -11,9 +12,14 @@ A docker container for the [JamSpell HTTP API Server](https://github.com/bakwc/J
 | MODEL | Model file to use from `DATA_DIR` | `en.bin` |
 
 ## Example Usage
-```
-$  docker run --rm -it -v `pwd`/en.bin:/opt/jamspell/data/en.bin alectolytic/jamspell-server
+```sh
+$  docker run --rm -it tigitz/jamspell
 + /usr/bin/jamspell-server /opt/jamspell/data/en.bin 0.0.0.0 8080
 [info] loading model
 [info] starting web server at 0.0.0.0:8080
+```
+
+Or you can use your own data model
+```sh
+$  docker run --rm -it -v `pwd`/en.bin:/opt/jamspell/data/en.bin tigitz/jamspell
 ```
